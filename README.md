@@ -43,6 +43,9 @@ no
 The file "automatonTests.pl" contains tested cases. 
 To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automatonTests"].".
 
+![image](https://github.com/ZValer/Automaton/assets/111622587/834e33e7-1a49-49e8-8e38-02d9e6348943)
+
+
 ## Analysis
 The complexity of my model is... 
 
