@@ -1,4 +1,4 @@
-:- consult('automata.pl').
+:- consult('automaton').
 
 % Define test cases
 test(1) :- check(001122), write('Expected: no, ').
