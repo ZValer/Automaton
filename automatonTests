@@ -1,0 +1,39 @@
+:- consult('automata.pl').
+
+% Define test cases
+test(1) :- check(001122), write('Expected: no, ').
+test(2) :- check(001121), write('Expected: yes, ').
+test(3) :- check(01010101), write('Expected: yes, ').
+test(4) :- check(011), write('Expected: yes, ').
+test(5) :- check(20120), write('Expected: yes, ').
+test(6) :- check(201112102), write('Expected: yes, ').
+test(7) :- check(001101), write('Expected: no, ').
+test(8) :- check(112210), write('Expected: no, ').
+test(9) :- check(011011), write('Expected: no, ').
+test(10) :- check(111012), write('Expected: no, ').
+
+% First test starts with 0 tests passed
+run_tests :-
+    run_tests(1, 0).
+
+% Display the number of passed tests when all 10 tests are completed
+run_tests(11, Passed) :-
+    format('Passed ~w of 10 tests', [Passed]).
+
+% Recursive function to run individual tests and update the counters
+run_tests(N, Passed) :-
+    test(N), % Run the test
+    format('Test ~w passed~n', [N]), 
+    N1 is N + 1, % Increment test index
+    Passed2 is Passed + 1, % Increment the number of passed tests
+    run_tests(N1, Passed2). % Continue running tests recursively
+
+% Function in case a test fails
+run_tests(N, Passed) :-
+    \+ test(N), 
+    format('Test ~w failed~n', [N]), 
+    N1 is N + 1,
+    run_tests(N1, Passed). % Continue running tests recursively
+
+% Start running tests
+:- run_tests.
