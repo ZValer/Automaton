@@ -51,9 +51,10 @@ The file "automatonTests.pl" contains tested cases.
 
 
 ## Analysis 
-The complexity of my model is in genral O(n), where n is the number of digits than is given to check. Here is my proof by induction or hand analysis time complexity:
+The complexity of my model is in general O(n). 
+
 ```
-gshsjxc
+Check "Time complexity analysis.pdf" for proof of the analysis.
 ```
 
 
