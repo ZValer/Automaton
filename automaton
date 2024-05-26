@@ -4,7 +4,7 @@ Date: 26/05/2024
 Project: E1 Implementation of Lexical Analysis (deterministic finite automaton (DFA))
 
 Purpose of the project: 
-Check is numbers belong to the language specified by the DFA.
+Check if numbers belong to the language specified by the DFA.
 Where it accepts all the posible combinations of 0, 1, 2, 
 that don't contain 1011, 1012, 1101, 1122.
 */
