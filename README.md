@@ -127,7 +127,8 @@ The file "automatonTests.pl" contains test cases for the DFA.
 > [!TIP]
 >To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automatonTests"].".
 
-![image](https://github.com/ZValer/Automaton/assets/111622587/73d49cc9-cbb2-4189-8315-fbb83074f5cc)
+![image](https://github.com/ZValer/Automaton/assets/111622587/b22fe7b8-949e-432a-9f9b-a1cde7ee3d6a)
+
 
 ### Regular Expression
 
@@ -135,7 +136,8 @@ The file "test_regex.py" contains test cases for the Regular Expression.
 > [!TIP]
 >To test it in a terminal you need to go the folder with the file, write "pyhton test_regex.py".
 
-[add image]
+![image](https://github.com/ZValer/Automaton/assets/111622587/1ebfe067-891e-4b14-9144-1dfc72575052)
+
 
 
 ## Analysis 
@@ -143,17 +145,25 @@ The file "test_regex.py" contains test cases for the Regular Expression.
 ### DFA
 The complexity of my model is in general O(n). 
 
-```
-Check "Time complexity analysis.pdf" for proof of the analysis.
-```
+- Declaring states and transitions: O(1)
+- go_through_Digits([], FinalState, FinalState): When the list is empty the final state is declared. O(1). 
+- go_through_Digits([Digit|RestofDigits], State1, FinalState): Predicate that goes through all the digits of the list recursively and transitions between states according to the DFA rules. Therefore, the time complexity is O(n), where n is the number of digits in the input list.
+- check(DigitsList): This predicate first calls go_through_Digits O(n) and then checks if the final state is an accepting state using the accept predicate O(1). 
+
+Considering these the previous breakdown, **the overall time complexity is O(n)**, where n is the number of digits in the input list.
 
 ### Regular Expression
+The complexity of my model is in general O(n). 
+
+The time complexity of the code is primarily determined by the time complexity of the check(input_string) function since main() calls it to verify if the given input string matches the regular expression pattern.
+
+- check function: The time complexity of the check function depends on the complexity of the regular expression. I this case, since the regular expression pattern (?!.*1101|.*1122|.*1011|.*1012)[012]+ is relatively simple, consisting of a negative lookahead and a character class, the time complexity is considered as O(n), where n is the length of the input string.  
+
+Therefore, **the overall time complexity is O(n)**.
 
 ## Conclusion
-After analyzing and implementing both methods: the DFA and the Regular Expression...
 
-On one hand, DFA..
-On the other hand, Regular Expressions …
+In conclusion, both of the methods are viable, they translated the rules of a language's syntax into an executable code and detected whether strings belonged to the language. Both had the same time complexity. However, due to the simplicity of the language analyzed, I believe the regular expression implementation is preferable. The time of analysis for this implementation was shorter and the code is more concise. On the other hand, the automata can be challenging to analyze and implement.
 
 
 ## References
