@@ -30,4 +30,5 @@ def main():
     else:
         print(input_string, "-> Rejected")
 
-main()
+if __name__ == "__main__":
+    main()
