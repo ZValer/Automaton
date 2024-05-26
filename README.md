@@ -13,9 +13,12 @@ The represented automaton is equivalent to the following regular expression:
 ^(?!.*1101|.*1122|.*1011|.*1012)[012]+$
 
 ## Implementation
-For my implementation of a lexical analysis, I followed the automaton as can be seen in "automaton.pl" fyle. To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automaton"].".
+For my implementation of a lexical analysis, I followed the automaton as can be seen in "automaton.pl" fyle. 
 
-Then put the input in the format "check(number).", for example "check(001122).", and the program should return "yes" if the string is accepted or "no" if the string is not part of the language.
+> [!TIP]
+> To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automaton"].".
+> 
+>Then put the input in the format "check(number).", for example "check(001122).", and the program should return "yes" if the string is accepted or "no" if the string is not part of the language.
 
 Some examples of inputs and outputs are:
 - check(001122).
@@ -41,12 +44,19 @@ no
 
 ## Tests
 The file "automatonTests.pl" contains tested cases. 
-To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automatonTests"].".
+> [!TIP]
+>To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automatonTests"].".
 
-## Analysis
-The complexity of my model is... 
+![image](https://github.com/ZValer/Automaton/assets/111622587/834e33e7-1a49-49e8-8e38-02d9e6348943)
 
-Here is my proof by induction or hand analysis time complexity:
+
+## Analysis 
+The complexity of my model is in general O(n). 
+
+```
+Check "Time complexity analysis.pdf" for proof of the analysis.
+```
+
 
 ## References
 Thakur, S. (2023). What Is The Difference Between DFA And NFA?. Unstop. Retrieved from: https://unstop.com/blog/difference-between-dfa-and-nfa
