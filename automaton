@@ -1,31 +1,18 @@
 /*
 Author: Valeria Zúñiga Mendoza
-Date: 20/03/2024
-Project: E1 Implementation of Lexical Analysis (Automaton and Regular Expression)
+Date: 26/05/2024
+Project: E1 Implementation of Lexical Analysis (deterministic finite automaton (DFA))
 
 Purpose of the project: 
-Check is numbers belong to the language specified by the automaton.
+Check is numbers belong to the language specified by the DFA.
 Where it accepts all the posible combinations of 0, 1, 2, 
 that don't contain 1011, 1012, 1101, 1122.
 */
 
-% Initial state
-init_state(a).
+% Define the initial state
+initial_state(a).
 
-% States
-state(a).
-state(b).
-state(c).
-state(d).
-state(e).
-state(f).
-state(g).
-state(h).
-state(i).
-state(j).
-state(k). 
-
-% Accepting states
+% Define the accepting states
 accept(b).
 accept(c).
 accept(d).
@@ -34,7 +21,7 @@ accept(g).
 accept(h).
 accept(j).
 
-% Move 
+% Define the transitions 
 move(a, b, 0).
 move(a, b, 2).
 move(a, c, 1).
@@ -67,44 +54,30 @@ move(j, k, 2).
 move(j, b, 0).
 move(j, c, 1).
 
-
-% Function to go through the list and get the final state
 % Base case: When the list is empty the final state is reached
-go_through_Digits([], State, State). 
+go_through_Digits([], FinalState, FinalState). 
 
-go_through_Digits([Digit|RestofDigits], State1, State2) :-
+% Recursive function to go through the list and get the final state
+go_through_Digits([Digit|RestofDigits], State1, FinalState) :-
     (move(State1, NextState, Digit) -> % Check if the move predicate succeeds
-        NextState = NextState; % If it succeeds, set NextState to State2
-        NextState = State1), % If it fails, keep NextState the same as State1
-    go_through_Digits(RestofDigits, NextState, State2). % Recursive function to apply to all the digits.
+        NextState = NextState; % If it succeeds, set NextState 
+        NextState = State1), % If there is no transition, keep NextState the same as State1
+    go_through_Digits(RestofDigits, NextState, FinalState). % Recursive function to apply to all the digits.
 
 % Verify if the list of digits leads to an accepting state
-verify_number(Digits) :-
-    init_state(StartState), % Get the first initial state: a
-    go_through_Digits(Digits, StartState, FinalState), % Call the function to go through the list and get the final state
+check(DigitsList) :-
+    initial_state(StartState), % Get the first initial state: a
+    go_through_Digits(DigitsList, StartState, FinalState), % Call the function to go through the list and get the final state
     (accept(FinalState) -> 
         writeln('yes'); % If the final state is an accepting state
         writeln('no') % If the final state is not an accepting state
     ).
 
-% Change number to a list of digits
-digit_list(N, L) :-
-    atom_chars(N, Chars), % Convert the atom to a list of characters
-    maplist(atom_number, Chars, L). % Convert each character to its numeric representation
-
-% Example:
-% ?- digit_list('1122', L).
-% L = [1, 1, 2, 2].
-
-check(Number) :-
-    digit_list(Number, Digits), % Call function to change number to a list of digits
-    verify_number(Digits). % Call function to verify the number
-
 % Examples:
-% ?- check(001122).
+% ?- check([0,0,1,1,2,2]).
 % no
 
-% ?- check(001121).
+% ?- check([0,0,1,1,2,1]).
 % yes
 
-% others: 001122 -> no 01010101 -> yes 011 -> yes 20120 -> yes 201112102 -> yes 001101 -> no 112210 -> no 011011 -> no 111012 -> no
+% others: 01010101 -> yes 011 -> yes 20120 -> yes 201112102 -> yes 001101 -> no 112210 -> no 011011 -> no 111012 -> no
