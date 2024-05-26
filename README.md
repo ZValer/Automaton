@@ -54,11 +54,11 @@ Breaking down the expression we have the following:
 (**?!.** *1101|.*1122|.*1011|.*1012)[012]+  
 ?! means a Negative Lookahead where it matches if the pattern is missing (NTU, 2018).  
 
-(?!.* **1101** |.*1122|.*1011|.*1012)[012]+  
+(?!.* **1101** |.* **1122** |.* **1011** |.* **1012** )[012]+  
 This groups of numbers are character patterns that should be missing. 
 .* Represents having any character zero or more times (NTU, 2018).  
 
-(?!.* 1101 **|**.*1122|.*1011|.*1012)[012]+  
+(?!.* 1101 **|**.*1122 **|**.*1011 **|**.*1012)[012]+  
 | is the OR Operator which matches previous OR next group of characters (Freitag, 2008).  
 
 Summarizing **(?!.*1101|.*1122|.*1011|.*1012)**[012]+  
@@ -67,7 +67,7 @@ Is grouping the restrictions where you can't have any sequence of characters tha
 (?!.*1101|.*1122|.*1011|.*1012)**[012]+**  
 For the following part  
 “[...]: Accept ANY ONE of the character within the square bracket” (NTU, 2018).   
-+ Matches 1 or more of the previous (Freitag, 2008).  
+"+" Matches 1 or more of the previous (Freitag, 2008).  
 Meaning for a match: the pattern should have 0, 1 or 2 at least one time. 
 
 This way the regular expressions guarantees a language accepts all the possible combination of 0, 1, 2 excluding the restricted patterns 1101, 1122, 1011 and 1012.   
@@ -81,7 +81,7 @@ For my implementation of a lexical analysis, I followed the automaton as can be 
 > [!TIP]
 > To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automaton"].".
 > 
->Then put the input in the format "check(number).", for example "check(001122).", and the program should return "yes" if the string is accepted or "no" if the string is not part of the language.
+>Then put the input in the format "check(number).", for example "check([0,0,1,1,2,2]).", and the program should return "yes" if the string is accepted or "no" if the string is not part of the language.
 
 Some examples of inputs and outputs are:
 - check([0,0,1,1,2,2]).
@@ -107,31 +107,47 @@ no
 
 
 ### Regular expression
-(...)
+For the second implementation, I followed the regular expression as can be seen "regex.py" fyle. 
+
+The regex implementation can be found in the regex.py file. To run the program in the terminal follow the instructions below:
+
+> [!TIP]
+> To test it in a terminal you need to go the folder with the file, write "python regex.py".
+> 
+>Then put the input the string you want to check, for example "001122", and the program should return "Accepted" if the string follows the regular expression or "Rejected" if the string doesn't.
+> 
 
 ## Tests
 
 To show that the implemented model works as intended and correctly solves the problem a set of documented tests are shown. 
 
-The file "automatonTests.pl" contains tested cases. 
+### DFA
+
+The file "automatonTests.pl" contains test cases for the DFA. 
 > [!TIP]
 >To test it in a terminal you need to go the folder with the file, write "swipl" and then "["automatonTests"].".
 
 ![image](https://github.com/ZValer/Automaton/assets/111622587/73d49cc9-cbb2-4189-8315-fbb83074f5cc)
 
+### Regular Expression
 
+The file "test_regex.py" contains test cases for the Regular Expression.
+> [!TIP]
+>To test it in a terminal you need to go the folder with the file, write "pyhton test_regex.py".
+
+[add image]
 
 
 ## Analysis 
 
-#### DFA
+### DFA
 The complexity of my model is in general O(n). 
 
 ```
 Check "Time complexity analysis.pdf" for proof of the analysis.
 ```
 
-#### Regular Expression
+### Regular Expression
 
 ## Conclusion
 After analyzing and implementing both methods: the DFA and the Regular Expression...
